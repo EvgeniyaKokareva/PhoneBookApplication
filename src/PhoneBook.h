@@ -54,7 +54,13 @@ Contact* PhoneBook::search(Contact& contactToSearch){
 
 //print phone book in accending order (of first name)
 void PhoneBook::printPhoneBook(Contact* contact){
-	phoneBook.inOrder(contact);
+	int count = phoneBook.inOrder(contact);
+	if (count != 1){
+		cout << count << " contacts" << endl;
+	}
+	else {
+		cout << count << " contact" << endl;
+	}
 }
 
 #endif /* PHONEBOOK_H_ */

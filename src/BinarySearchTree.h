@@ -14,7 +14,7 @@ template <class T>
 class BinarySearchTree{
 	private:
 		node<T>* root;
-		void inOrderT(node<T>*, T* = NULL);
+		int inOrderT(node<T>*, T* = NULL);
 		void preOrderT(node<T>*);
 		void postOrderT(node<T>*);
 		void destroy(node<T>*);
@@ -29,7 +29,7 @@ class BinarySearchTree{
 		void deletenode(node<T>*&, T&);
 	public:
 		BinarySearchTree();
-		void inOrder(T* item = NULL){ inOrderT(root, item);}
+		int inOrder(T* item = NULL){ return inOrderT(root, item);}
 		void preOrder(){preOrderT(root);}
 		void postOrder(){postOrderT(root);}
 		int height(){return treeHeight(root);}
@@ -48,18 +48,18 @@ BinarySearchTree<T>::BinarySearchTree(){root = NULL;}
 
 //this method will help print full phone book or only it's part in ascending order
 template <class T>
-void BinarySearchTree<T>::inOrderT(node<T>* p, T* item){
-	if(p!=NULL){
-		inOrderT(p->left, item);
+int BinarySearchTree<T>::inOrderT(node<T>* p, T* item){
+	int count = 0;
+	if(p != NULL){
+		count += inOrderT(p->left, item);
 
 		if (item == NULL || p->data < *item){
 			cout<<p->data;
-			inOrderT(p->right, item);
-		}
-		else{
-			return;
+			count += 1;
+			count += inOrderT(p->right, item);
 		}
 	}
+	return count;
 }
 
 template <class T>
